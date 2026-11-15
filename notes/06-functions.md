@@ -1,88 +1,126 @@
-# Functions
+# Functions — Interview Preparation
 
-Functions are reusable blocks of code that perform a specific task. They make programs easier to read, test, and maintain.
+Functions package behavior into reusable units. A well-designed function has a clear purpose, explicit inputs, a useful return value, and limited side effects.
 
-## Function definition
-
-```python
-def greet(name):
-    print(f"Hello, {name}!")
-
-
-greet("Asha")
-```
-
-## Return values
+## Defining and calling functions
 
 ```python
-def add(a, b):
-    return a + b
+def add(left, right):
+    """Return the sum of two values."""
+    return left + right
 
-result = add(2, 3)
-print(result)
+answer = add(2, 3)
 ```
 
-## Parameters and arguments
+A function without an explicit `return` returns `None`. `print()` displays a value; it does not return that value to the caller.
+
+## Parameters and argument kinds
+
+Python supports positional-only, positional-or-keyword, keyword-only, and variable-length parameters. Keyword-only parameters follow `*` or `*args`.
 
 ```python
-def power(base, exponent=2):
-    return base ** exponent
+def connect(host, /, port=8000, *, timeout=5):
+    return host, port, timeout
 
-print(power(3))
-print(power(3, 3))
+connect("localhost", timeout=2)
 ```
 
-## Scope
+Use keyword arguments when they make calls more readable. Default values are evaluated once, when the function is defined.
+
+## Mutable default argument pitfall
+
+Do not use a mutable object such as `[]` as a default when each call should get a fresh object.
 
 ```python
-x = 10
-
-def demo():
-    x = 20
-    print(x)
-
-demo()
-print(x)
+def collect(value, items=None):
+    if items is None:
+        items = []
+    items.append(value)
+    return items
 ```
-
-`x` inside the function is local to that function unless you use `global` deliberately. In general, avoid using globals and instead pass values as parameters.
 
 ## `*args` and `**kwargs`
 
-```python
-def show(*args, **kwargs):
-    print(args)
-    print(kwargs)
+`*args` collects extra positional arguments into a tuple. `**kwargs` collects extra keyword arguments into a dictionary.
 
-show(1, 2, 3, name="Asha", city="Pune")
+```python
+def describe(*args, **kwargs):
+    return args, kwargs
 ```
+
+They can also unpack an iterable or mapping in a call: `function(*values, **options)`.
+
+## Scope and name lookup
+
+Python uses the LEGB lookup rule: Local, Enclosing, Global, Built-in. Assigning to a name inside a function usually makes it local unless declared `global` or `nonlocal`. Prefer parameters and return values over global mutable state.
+
+```python
+factor = 3
+
+def scale(number):
+    return number * factor
+```
+
+## Functions are objects
+
+Functions can be assigned to names, passed as arguments, and returned from other functions. This enables callbacks, closures, and decorators.
+
+```python
+def apply(operation, value):
+    return operation(value)
+
+print(apply(abs, -4))
+```
+
+A `lambda` creates a small anonymous expression function. Use `def` when behavior needs a name, documentation, or multiple steps.
 
 ## Recursion
 
-```python
-def factorial(n):
-    if n == 0:
-        return 1
-    return n * factorial(n - 1)
+A recursive function calls itself and needs a base case. Python has a recursion limit, so an iterative solution is often preferable for deep input.
 
-print(factorial(5))
+```python
+def factorial(number):
+    if number < 0:
+        raise ValueError("number must be non-negative")
+    if number <= 1:
+        return 1
+    return number * factorial(number - 1)
 ```
 
-## Common interview questions
+For large values, this recursive version can hit the recursion limit; discuss an iterative alternative when relevant.
 
-- What is the difference between parameters and arguments?
-- How do default arguments work?
-- What is variable scope?
-- How do you write a recursive function?
-- Why is `global` usually avoided?
+## Generator functions
 
-## Practice questions
+A function containing `yield` returns a generator and suspends/resumes execution as values are requested. See the [iterators and generators notes](11-iterators-generators-decorators.md).
 
-1. Write a function to calculate the square of a number.
-2. Write a function to check if a number is even.
-3. Write a function to reverse a list using recursion.
-4. Write a function that accepts arbitrary arguments and prints them.
+## Type hints and docstrings
 
-## Interview tip
+Annotations communicate intended types and are useful to editors and static checkers; they are not automatic runtime validation.
 
-A good answer is not just syntax; explain how the function organizes logic and whether it returns a value or acts on side effects.
+```python
+def greet(name: str) -> str:
+    """Return a greeting for name."""
+    return f"Hello, {name}!"
+```
+
+## Interview discussion points
+
+- Difference between a parameter and an argument.
+- Difference between `return` and `print`.
+- Mutable default arguments and the `None` sentinel pattern.
+- Positional versus keyword-only parameters.
+- LEGB scope and closure behavior.
+- Recursion tradeoffs and base cases.
+- Pure functions versus side effects.
+
+## Practice
+
+1. Write a function that returns the second-largest distinct number and define behavior for insufficient input.
+2. Write a function with a keyword-only option.
+3. Demonstrate the mutable-default pitfall, then fix it.
+4. Implement factorial iteratively and recursively; compare their constraints.
+5. Write a higher-order function that accepts another function.
+
+## Interview checklist
+
+State assumptions, validate input when appropriate, keep behavior focused, test edge cases, and explain time and space complexity.

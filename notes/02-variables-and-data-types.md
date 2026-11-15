@@ -1,94 +1,97 @@
-# Variables and Data Types
+# Variables and Data Types — Interview Preparation
 
-## Variables
+## Names and dynamic typing
 
-Variables are labels pointing to values stored in memory.
-
-```python
-count = 10
-name = "Python"
-```
-
-### Naming rules
-
-- names can include letters, digits, and underscores
-- must not start with a digit
-- should use `snake_case` for readability
-
-## Built-in data types
-
-### 1. Integer (`int`)
+Python names refer to objects, and a name can later be bound to an object of a different type. The object has a type; the variable name is not permanently declared with one.
 
 ```python
-age = 30
+value = 10
+value = "ten"
 ```
 
-### 2. Float (`float`)
+Use `type(value)` to inspect a value's type and `isinstance(value, SomeType)` when checking type membership is appropriate.
 
-```python
-price = 12.5
-```
+## Common built-in types
 
-### 3. String (`str`)
+- `int`: arbitrary-precision integers
+- `float`: floating-point numbers; many decimal fractions are approximate in binary
+- `complex`: complex values, such as `2 + 3j`
+- `bool`: `True` or `False` (a subclass of `int`)
+- `str`: immutable Unicode text
+- `list`: mutable ordered sequence
+- `tuple`: immutable ordered sequence
+- `dict`: insertion-ordered key-value mapping
+- `set` and `frozenset`: mutable and immutable sets of unique hashable values
+- `NoneType`: the type of the singleton `None`
 
-```python
-name = "Alice"
-```
+## Equality and identity
 
-### 4. Boolean (`bool`)
-
-```python
-is_active = True
-```
-
-### 5. None
+`==` checks value equality. `is` checks object identity (whether two names refer to the same object). Use identity for singletons such as `None`, not as a general substitute for equality.
 
 ```python
 result = None
+if result is None:
+    print("No result")
 ```
-
-`None` means “no value”. It is different from `0`, `False`, and `""`.
 
 ## Type conversion
 
+Constructors such as `int()`, `float()`, and `str()` convert compatible values. Conversion can raise exceptions, for example `int("hello")` raises `ValueError`.
+
 ```python
-print(int("5"))
-print(float("3.14"))
-print(str(100))
-print(bool(0))
+count = int("12")
+price = float("3.5")
+label = str(count)
 ```
 
-## Mutable vs immutable
+`bool(value)` follows truthiness rules; `bool("False")` is `True` because the string is nonempty.
 
-- Mutable: list, dict, set
-- Immutable: int, float, str, tuple
+## Mutability
+
+Mutable objects can be changed in place; immutable objects cannot. Common mutable types include lists, dictionaries, and sets. Integers, floats, strings, and tuples are immutable containers. A tuple can still contain a mutable object, so it is not necessarily deeply immutable.
 
 ```python
-name = "Alice"
-# name[0] = "B" -> TypeError
+numbers = [1, 2]
+alias = numbers
+alias.append(3)
+print(numbers)  # [1, 2, 3]
+
+text = "cat"
+text = "b" + text[1:]  # creates a new string and rebinds text
+```
+
+## Numeric details interviewers may ask
+
+- `//` performs floor division; for negative values it rounds toward negative infinity.
+- `/` returns a floating-point result for integers.
+- Floating-point values can have representation error; use `decimal.Decimal` when decimal arithmetic requirements demand it.
+- Python integers can grow beyond fixed machine-word ranges, limited by available memory.
+
+## Type hints
+
+Annotations document expected types and support static-analysis tools; Python does not generally enforce them automatically at runtime.
+
+```python
+def repeat(text: str, times: int) -> str:
+    return text * times
 ```
 
 ## Common interview questions
 
-- What is the difference between `==` and `=`?
-- Why is `None` different from `0` or `False`?
-- What are mutable vs immutable types?
-- Why does `str` not allow item assignment?
+1. What is the difference between equality and identity?
+2. Why does a list change appear through two names that reference it?
+3. Why is `bool("False")` true?
+4. What is the difference between mutable and immutable objects?
+5. Why can floating-point equality be surprising?
 
-## Example challenge
+## Practice
 
-```python
-x = 10
-y = x
-x = 20
-print(y)  # output: 10
-```
+1. Predict the output when a list is assigned to two names and mutated.
+2. Demonstrate `==` and `is` with values and with `None`.
+3. Convert user input to an integer and handle invalid conversion.
+4. Explain why a tuple containing a list is not deeply immutable.
+5. Compare `0`, `False`, `None`, and an empty string in truth-value tests.
 
-Numbers are immutable; reassigning `x` creates a new value.
+## Interview checklist
 
-## Practice questions
-
-1. Convert a string to int and multiply by 3.
-2. Write a program to check if a variable is empty or None.
-3. Explain the difference between mutable and immutable types.
-4. Write a program to store a person’s name, age, and city in separate variables.
+Discuss dynamic typing, names and objects, identity versus equality, mutability, truthiness, conversion errors, and float precision.

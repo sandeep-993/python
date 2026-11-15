@@ -1,54 +1,71 @@
-# Practice Projects
+# Interview Practice Projects
 
-These projects are ideal for building a strong Python interview foundation. Focus on clarity and problem-solving, not only output.
+Projects turn isolated concepts into practical problem-solving. Keep the first version small, write down requirements, and explain design choices as you build. For each project, include tests and a short README describing how to run it.
 
-## Beginner projects
+## Project 1: Number guessing game
 
-1. Calculator
-2. Simple number guessing game
-3. To-do list
-4. Contact book
-5. Prime number checker
+**Practice:** input conversion, loops, conditions, random numbers, and validation.
 
-## Intermediate projects
+**Requirements:** generate a secret number, accept guesses, report higher/lower, and stop on a correct guess or a defined attempt limit. Handle invalid input without losing an attempt unless the requirements say otherwise.
 
-1. Expense tracker
-2. Student record management system
-3. File-based note app
-4. Quiz game
-5. Password generator
+**Interview extensions:** isolate the game logic in functions, inject the secret number for deterministic tests, and track attempts.
 
-## Advanced projects
+## Project 2: Calculator
 
-1. Library management system
-2. Restaurant billing app
-3. Tic-tac-toe
-4. Hangman game
-5. Mini inventory system
+**Practice:** functions, branching, exceptions, and input validation.
 
-## How to solve each project
+**Requirements:** support a small set of arithmetic operations and reject invalid operators and division by zero clearly.
 
-- write requirements first
-- implement the smallest working version
-- test edge cases
-- refactor for clarity
-- add one feature at a time
+**Extensions:** separate parsing from calculation and add unit tests for every operation and error case.
 
-## Practice habit
+## Project 3: To-do list
 
-For each project:
+**Practice:** lists or dictionaries, CRUD operations, functions, and JSON persistence.
 
-- explain the problem in plain English
-- think of the data structures needed
-- write pseudocode
-- implement in Python
-- test with edge cases
+**Requirements:** add, list, complete, and remove tasks; save and load them from a file.
 
-## Interview preparation target
+**Extensions:** assign unique IDs, validate file data, and avoid losing data if a write fails.
 
-Your goal is not just to build apps. It is to practice:
+## Project 4: Contact book
 
-- writing clean code
-- choosing data structures correctly
-- explaining your logic clearly
-- handling errors and edge cases
+**Practice:** dictionaries, searching, input normalization, and file handling.
+
+**Requirements:** add, search, update, and remove contacts. Decide whether names, email addresses, or generated IDs are unique keys.
+
+**Extensions:** support CSV or JSON import/export and test duplicate handling.
+
+## Project 5: Expense tracker
+
+**Practice:** data modeling, dates, decimal values, aggregation, and tests.
+
+**Requirements:** record an amount, category, and date; list expenses and calculate totals by category or month.
+
+**Extensions:** use `decimal.Decimal` when exact decimal currency arithmetic is required, validate dates, and test boundary dates.
+
+## Project 6: Student records
+
+**Practice:** classes or dataclasses, collections, sorting, validation, and exceptions.
+
+**Requirements:** add students, record marks, compute summaries, and find a student by ID.
+
+**Extensions:** separate domain logic from input/output and add tests for missing IDs and invalid marks.
+
+## How to approach a project in an interview
+
+1. Clarify users, inputs, outputs, constraints, and error behavior.
+2. Identify the main entities and operations.
+3. Select data structures based on access and update patterns.
+4. Sketch a small API or pseudocode before implementation.
+5. Implement a minimal working version.
+6. Test normal, boundary, and invalid cases.
+7. Discuss time/space complexity and tradeoffs.
+8. Refactor only after the behavior is correct.
+
+## Review checklist
+
+- Are responsibilities separated and names clear?
+- Are assumptions and edge cases documented?
+- Is input validated at the boundary?
+- Are file resources and errors handled safely?
+- Can core logic be tested without interactive input?
+- Are secrets and personal data kept out of the repository?

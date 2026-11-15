@@ -1,57 +1,101 @@
-# Iterators, Generators, and Decorators
+# Iterators, Generators, and Decorators — Interview Preparation
 
-## Iterators
+## Iterable versus iterator
 
-An iterator is an object that can be iterated over using `next()`.
+An iterable can provide an iterator, usually through `iter(obj)`. An iterator produces values with `next()` and remembers its current state. When exhausted, it raises `StopIteration`.
 
 ```python
-numbers = [1, 2, 3]
-iter_obj = iter(numbers)
-print(next(iter_obj))
-print(next(iter_obj))
+values = [10, 20]
+iterator = iter(values)
+print(next(iterator))  # 10
+print(next(iterator))  # 20
 ```
 
-## Generators
+A list is iterable but is not itself an iterator. A `for` loop obtains an iterator and handles exhaustion automatically.
 
-A generator yields values one at a time. It is memory efficient for streams or large sequences.
+## Iterator protocol
+
+An iterator implements `__iter__()` returning itself and `__next__()` returning the next value or raising `StopIteration`. Most application code should use existing iterables or generators rather than implementing this protocol manually.
+
+## Generator functions
+
+A function containing `yield` creates a generator. Its execution pauses at each `yield` and resumes when the next value is requested.
 
 ```python
-def count_up_to(n):
-    i = 1
-    while i <= n:
-        yield i
-        i += 1
+def countdown(start):
+    while start > 0:
+        yield start
+        start -= 1
 
-for value in count_up_to(5):
+for value in countdown(3):
     print(value)
 ```
 
-## Decorators
+Generators are lazy: they can process a stream without storing every result at once. They are usually single-use; once exhausted, they do not restart automatically.
 
-Decorators wrap a function to add behavior.
+## Generator expressions
 
 ```python
-def uppercase_decorator(func):
-    def wrapper():
-        result = func()
-        return result.upper()
-    return wrapper
-
-@uppercase_decorator
-def greet():
-    return "hello"
-
-print(greet())
+squares = (number * number for number in range(1_000_000))
+first_three = [next(squares) for _ in range(3)]
 ```
 
-## Why interviewers ask about them
+A generator expression avoids building a full list up front. It is useful when values are consumed once; a list is better when repeated access or reuse is required.
 
-- they test knowledge of Python's iteration model
-- generators highlight memory efficiency
-- decorators show control over function behavior
+## `yield from`
 
-## Practice questions
+`yield from iterable` delegates iteration to another iterable or generator and can simplify generator composition.
 
-1. Write a generator that yields even numbers up to 20.
-2. Create a decorator that logs the execution time of a function.
-3. Explain the difference between iteration and direct indexing.
+## Decorators
+
+A decorator is a callable that takes a function (or class) and returns a replacement, often a wrapper. `@decorator` is equivalent to rebinding the function through the decorator.
+
+```python
+from functools import wraps
+
+def announce(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        print(f"Calling {func.__name__}")
+        return func(*args, **kwargs)
+    return wrapper
+
+@announce
+def greet(name):
+    return f"Hello, {name}"
+```
+
+`functools.wraps` preserves useful metadata such as the original function's name and docstring. A wrapper should normally accept `*args, **kwargs` and return the wrapped function's result.
+
+## Decorators with arguments
+
+A decorator that accepts configuration usually has an outer function returning the actual decorator, which then returns a wrapper. This is a closure: the wrapper remembers values from its enclosing scope.
+
+## Common interview questions
+
+- What is the difference between an iterable and an iterator?
+- How does a generator differ from returning a list?
+- What happens when a generator is exhausted?
+- What does `yield` do to function execution?
+- What is a decorator, and why use `functools.wraps`?
+- What does `*args, **kwargs` preserve in a wrapper?
+
+## Performance and pitfalls
+
+- Laziness can reduce memory, but it does not make every computation faster.
+- A generator can be exhausted; create a new generator if another pass is needed.
+- Do not use a generator when the data must be indexed or traversed repeatedly.
+- Decorators can affect debugging and signatures; preserve metadata and behavior.
+- A decorator wrapper should return the wrapped function's return value.
+
+## Practice
+
+1. Write a generator that yields even numbers up to a limit.
+2. Write a generator that reads and transforms items one at a time.
+3. Create a timing or logging decorator that accepts any function arguments and returns its result.
+4. Add a configurable decorator that repeats a function a specified number of times.
+5. Explain the memory difference between a list comprehension and a generator expression.
+
+## Interview checklist
+
+Be prepared to explain lazy evaluation, iterator state, exhaustion, generator memory behavior, closures, wrapper signatures, and metadata preservation.
