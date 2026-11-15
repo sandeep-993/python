@@ -2,36 +2,54 @@
 
 ## Standard library
 
-Explore useful modules including `pathlib` (paths), `collections` (specialized containers), `datetime` (dates and times), `itertools` (iterator tools), and `json` (JSON data).
+Python provides many useful modules.
+
+```python
+import math
+import random
+import datetime
+```
+
+Examples:
+
+- `math` for mathematical functions
+- `random` for randomness
+- `datetime` for dates and times
+- `json` for JSON handling
+- `collections` for specialized containers
 
 ## Testing
 
-Start with small functions and tests that check expected behavior. Python's built-in `unittest` is available without installing packages. Test normal cases, boundary cases, and invalid input.
+Testing helps verify behavior before deployment. The standard library has `unittest`.
 
 ```python
 import unittest
 
-def double(value):
-    return value * 2
-
-class DoubleTests(unittest.TestCase):
-    def test_integer(self):
-        self.assertEqual(double(4), 8)
+class TestExample(unittest.TestCase):
+    def test_add(self):
+        self.assertEqual(2 + 2, 4)
 ```
 
-## Readability and type hints
-
-Use descriptive names, consistent formatting, and short focused functions. PEP 8 is the common Python style guide. Type hints can document expected inputs and outputs:
+## Type hints
 
 ```python
-def greet(name: str) -> str:
-    return f"Hello, {name}!"
+def add(a: int, b: int) -> int:
+    return a + b
 ```
 
-Type hints help readers and tools; Python does not enforce them automatically at runtime.
+Type hints help readability and static analysis, but Python does not enforce them by default.
 
-## Practice
+## PEP 8
 
-1. Use `pathlib` to list files in a directory.
-2. Write tests for a function you created in an earlier topic.
-3. Add type hints and a docstring to one practice function.
+PEP 8 is Python's style guide. Follow it for readable code:
+
+- use 4 spaces for indentation
+- add blank lines between functions
+- keep function names in lowercase with underscores
+- use descriptive names
+
+## Practice questions
+
+1. Use `math.sqrt()` to calculate a square root.
+2. Write a small `unittest` case for a function.
+3. Add type hints to a function and explain their benefit.

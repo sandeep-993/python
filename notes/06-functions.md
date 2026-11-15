@@ -1,24 +1,88 @@
 # Functions
 
-Functions package reusable behavior. Define one with `def`; use `return` to send a result back to the caller.
+Functions are reusable blocks of code that perform a specific task. They make programs easier to read, test, and maintain.
+
+## Function definition
 
 ```python
-def add(first, second):
-    return first + second
+def greet(name):
+    print(f"Hello, {name}!")
+
+
+greet("Asha")
+```
+
+## Return values
+
+```python
+def add(a, b):
+    return a + b
 
 result = add(2, 3)
+print(result)
 ```
 
 ## Parameters and arguments
 
-Python supports positional and keyword arguments, default parameter values, and variable-length arguments using `*args` and `**kwargs`. Avoid mutable default values such as `items=[]`; use `None` and create a new list inside the function instead.
+```python
+def power(base, exponent=2):
+    return base ** exponent
+
+print(power(3))
+print(power(3, 3))
+```
 
 ## Scope
 
-Names created inside a function are generally local to it. Prefer passing values in and returning results rather than relying on global state.
+```python
+x = 10
 
-## Practice
+def demo():
+    x = 20
+    print(x)
 
-1. Write a function that returns whether a number is even.
-2. Write a function that returns the largest value in a list.
-3. Write a function with a default greeting name and call it with positional and keyword arguments.
+demo()
+print(x)
+```
+
+`x` inside the function is local to that function unless you use `global` deliberately. In general, avoid using globals and instead pass values as parameters.
+
+## `*args` and `**kwargs`
+
+```python
+def show(*args, **kwargs):
+    print(args)
+    print(kwargs)
+
+show(1, 2, 3, name="Asha", city="Pune")
+```
+
+## Recursion
+
+```python
+def factorial(n):
+    if n == 0:
+        return 1
+    return n * factorial(n - 1)
+
+print(factorial(5))
+```
+
+## Common interview questions
+
+- What is the difference between parameters and arguments?
+- How do default arguments work?
+- What is variable scope?
+- How do you write a recursive function?
+- Why is `global` usually avoided?
+
+## Practice questions
+
+1. Write a function to calculate the square of a number.
+2. Write a function to check if a number is even.
+3. Write a function to reverse a list using recursion.
+4. Write a function that accepts arbitrary arguments and prints them.
+
+## Interview tip
+
+A good answer is not just syntax; explain how the function organizes logic and whether it returns a value or acts on side effects.

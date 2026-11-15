@@ -1,25 +1,66 @@
 # Object-Oriented Programming
 
-A class defines a type of object; an instance is one object created from that class. `__init__` initializes instance state, and `self` refers to the current instance.
+Object-oriented programming (OOP) organizes code into classes and objects. It helps model real-world entities and encapsulate behavior.
+
+## Class and object
 
 ```python
-class Counter:
-    def __init__(self, value=0):
-        self.value = value
+class Dog:
+    def __init__(self, name):
+        self.name = name
 
-    def increment(self):
-        self.value += 1
+    def bark(self):
+        return f"{self.name} says woof!"
+
+
+my_dog = Dog("Bruno")
+print(my_dog.bark())
 ```
 
-## Design ideas
+## Attributes and methods
 
-- Keep each class focused on a clear responsibility.
-- Use composition (objects containing other objects) when it makes relationships clearer.
-- Inheritance is useful for a genuine "is-a" relationship; avoid deep inheritance trees.
-- Special methods such as `__str__` customize how objects work with built-in operations.
+- attributes store state
+- methods define behavior
 
-## Practice
+## Inheritance
 
-1. Create a `Book` class with a title and author.
-2. Add a method that returns a readable description.
-3. Create a `Library` class that stores and lists several books.
+```python
+class Animal:
+    def speak(self):
+        return "Some sound"
+
+class Cat(Animal):
+    def speak(self):
+        return "Meow"
+```
+
+## Encapsulation
+
+Encapsulation means bundling data and methods together. In Python, it is usually accomplished with conventions like `_private_var` rather than strict access control.
+
+## Polymorphism
+
+Different objects can respond to the same method name in different ways.
+
+```python
+class Bird:
+    def sound(self):
+        return "tweet"
+
+class Dog:
+    def sound(self):
+        return "bark"
+```
+
+## Interview questions
+
+- What is the difference between a class and an object?
+- What is inheritance?
+- What is method overriding?
+- Why is OOP useful in large programs?
+
+## Practice questions
+
+1. Create a `Student` class with `name` and `marks` attributes.
+2. Add a method to calculate the average.
+3. Create a `Teacher` class that inherits from `Person`.

@@ -1,12 +1,54 @@
 # Practice Projects
 
-Build these in order, keeping each project small and adding features as you learn.
+These projects are ideal for building a strong Python interview foundation. Focus on clarity and problem-solving, not only output.
 
-1. **Number guessing game** — input, conditions, loops, and validation.
-2. **Calculator** — functions, operators, and exception handling.
-3. **To-do list** — lists, functions, and saving/loading data.
-4. **Contact book** — dictionaries, searching, and JSON files.
-5. **Expense tracker** — data structures, dates, files, and summaries.
-6. **Student records** — classes, validation, and tests.
+## Beginner projects
 
-For each project, write down the requirements first, implement a small working version, test it, and then add one feature at a time. Keep runnable code in `practice/` and summarize what you learned in the relevant topic notes.
+1. Calculator
+2. Simple number guessing game
+3. To-do list
+4. Contact book
+5. Prime number checker
+
+## Intermediate projects
+
+1. Expense tracker
+2. Student record management system
+3. File-based note app
+4. Quiz game
+5. Password generator
+
+## Advanced projects
+
+1. Library management system
+2. Restaurant billing app
+3. Tic-tac-toe
+4. Hangman game
+5. Mini inventory system
+
+## How to solve each project
+
+- write requirements first
+- implement the smallest working version
+- test edge cases
+- refactor for clarity
+- add one feature at a time
+
+## Practice habit
+
+For each project:
+
+- explain the problem in plain English
+- think of the data structures needed
+- write pseudocode
+- implement in Python
+- test with edge cases
+
+## Interview preparation target
+
+Your goal is not just to build apps. It is to practice:
+
+- writing clean code
+- choosing data structures correctly
+- explaining your logic clearly
+- handling errors and edge cases

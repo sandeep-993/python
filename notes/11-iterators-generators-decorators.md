@@ -1,25 +1,57 @@
 # Iterators, Generators, and Decorators
 
-## Iterators and generators
+## Iterators
 
-An iterator produces items one at a time. A generator function uses `yield` to produce values lazily, which can avoid building a complete collection in memory.
+An iterator is an object that can be iterated over using `next()`.
 
 ```python
-def count_up_to(limit):
-    number = 1
-    while number <= limit:
-        yield number
-        number += 1
+numbers = [1, 2, 3]
+iter_obj = iter(numbers)
+print(next(iter_obj))
+print(next(iter_obj))
 ```
 
-Use `next()` to request an iterator's next item; iteration ends with `StopIteration`.
+## Generators
+
+A generator yields values one at a time. It is memory efficient for streams or large sequences.
+
+```python
+def count_up_to(n):
+    i = 1
+    while i <= n:
+        yield i
+        i += 1
+
+for value in count_up_to(5):
+    print(value)
+```
 
 ## Decorators
 
-A decorator wraps a function to add behavior. The `@decorator_name` syntax applies a decorator when defining a function. Learn to read and use decorators before writing complex ones.
+Decorators wrap a function to add behavior.
 
-## Practice
+```python
+def uppercase_decorator(func):
+    def wrapper():
+        result = func()
+        return result.upper()
+    return wrapper
 
-1. Write a generator that yields even numbers up to a limit.
-2. Iterate through a generator with a `for` loop.
-3. Write a simple decorator that prints a message before calling a function.
+@uppercase_decorator
+def greet():
+    return "hello"
+
+print(greet())
+```
+
+## Why interviewers ask about them
+
+- they test knowledge of Python's iteration model
+- generators highlight memory efficiency
+- decorators show control over function behavior
+
+## Practice questions
+
+1. Write a generator that yields even numbers up to 20.
+2. Create a decorator that logs the execution time of a function.
+3. Explain the difference between iteration and direct indexing.

@@ -1,22 +1,51 @@
 # Exceptions
 
-Exceptions report errors or unusual conditions during execution. Handle only errors you can meaningfully recover from.
+Exceptions are errors that occur during program execution. They are used to signal abnormal situations without crashing silently.
+
+## Basic try-except
 
 ```python
 try:
-    quantity = int(input("Quantity: "))
+    x = int("abc")
 except ValueError:
-    print("Please enter a whole number.")
-else:
-    print(f"Quantity: {quantity}")
-finally:
-    print("Finished")
+    print("That is not a valid integer")
 ```
 
-`else` runs when the `try` block succeeds; `finally` runs whether an exception occurred or not. Use `raise` to signal an error deliberately. Catch specific exception types rather than using a bare `except`.
+## finally
 
-## Practice
+```python
+try:
+    value = 10 / 0
+except ZeroDivisionError:
+    print("Cannot divide by zero")
+finally:
+    print("This always runs")
+```
 
-1. Safely convert user input to a number and handle invalid input.
-2. Write a function that raises `ValueError` for an invalid argument.
-3. Explain when `finally` is useful, even if an exception occurs.
+## Raising exceptions
+
+```python
+def divide(a, b):
+    if b == 0:
+        raise ValueError("Denominator cannot be zero")
+    return a / b
+```
+
+## Common built-in exceptions
+
+- `ValueError`
+- `TypeError`
+- `ZeroDivisionError`
+- `FileNotFoundError`
+- `IndexError`
+- `KeyError`
+
+## Interview tip
+
+Catch specific exceptions instead of catching everything. Avoid broad `except:` unless you know exactly why.
+
+## Practice questions
+
+1. Read an integer from input and handle invalid input gracefully.
+2. Write a function that raises `ValueError` for negative input.
+3. Explain why `finally` is useful.

@@ -2,32 +2,70 @@
 
 ## What Python is
 
-Python is a high-level, general-purpose programming language. It is commonly used for scripting, automation, web development, data work, and many other tasks.
+Python is a high-level, general-purpose programming language. It is easy to read, expressive, and widely used in scripting, automation, backend development, data analysis, and AI.
 
-## Syntax and indentation
+## Python syntax basics
 
-Indentation defines code blocks. Use consistent four-space indentation.
+Python uses indentation instead of curly braces. Blocks are defined by consistent indentation.
 
 ```python
-if 3 > 2:
-    print("The condition is true")
+if 5 > 3:
+    print("Five is greater than three")
 ```
 
-## Comments and output
+## Variables
 
-Use `#` for a single-line comment and `print()` to display a value.
+Variables store values. Python decides the type dynamically.
+
+```python
+name = "Asha"
+age = 25
+pi = 3.14
+is_student = True
+```
+
+## Comments
 
 ```python
 # This is a comment
-print("Hello, Python!")
+print("Hello")
 ```
 
-## Running a script
+## Input and output
 
-Save code in a `.py` file and run it with `python filename.py` (or `python3 filename.py`, depending on your system).
+```python
+name = input("Enter your name: ")
+print("Hello,", name)
+```
 
-## Practice
+## Type conversion
 
-1. Print your name and one goal for learning Python.
-2. Write a short script with a comment and two `print()` calls.
-3. Intentionally change indentation in a block, run it, and understand the error.
+```python
+num = "10"
+print(int(num) + 5)
+```
+
+## Important interview points
+
+- Python is dynamically typed.
+- Indentation matters.
+- Use descriptive variable names.
+- Avoid naming conflicts with built-ins such as `list`, `str`, or `sum`.
+
+## Common beginner mistakes
+
+- forgetting `:` after `if`, `for`, `def`, `class`
+- mismatched indentation
+- using `=` instead of `==` in comparisons
+- converting strings to numbers improperly
+
+## Practice questions
+
+1. Print your name and age.
+2. Read two numbers from input and print their sum.
+3. Write a program to swap two numbers.
+4. Print the first 10 natural numbers using a loop.
+
+## Quick revision
+
+Python basics focus on readability, indentation, variables, input/output, and simple logic. In interviews, clarity matters as much as correctness.
