@@ -35,3 +35,27 @@ In the Silver layer, we perform data quality and cleansing operations using PySp
 In the Gold layer, we focus on business-level validations. We validate aggregations, transaction counts, financial totals, dimension and fact relationships, and business KPIs. We also perform reconciliation between Silver and Gold datasets to ensure that the business metrics are accurate.
 
 We orchestrate these validation activities through MWAA, capture validation metrics and use CloudWatch for monitoring and alerting. If critical validations fail, we prevent the affected dataset from being published to downstream consumers.
+
+
+
+### PayPal – Merchant Payment Analytics Platform
+
+I worked on a merchant-oriented payment analytics platform where our objective was to consolidate payment-related data and provide merchant-level business insights for reporting and analytics.
+
+We worked with multiple datasets, including merchant master data, payment transactions, refunds, settlement records, and disputes. These datasets helped business teams analyze merchant payment performance, transaction success rates, refund trends, settlement amounts, and chargeback activity.
+
+Data was received from upstream systems and ingested into Google Cloud Storage. We used Cloud Composer (Apache Airflow) to orchestrate the end-to-end data pipeline and manage dependencies between different processing tasks.
+
+We used Dataproc with PySpark to perform distributed data processing. Our transformations included schema validation, data cleansing, null handling, duplicate removal, joins, and aggregations.
+
+We joined payment transactions with merchant master data using merchant ID and integrated refund and dispute information using transaction IDs. We also processed settlement records to calculate gross amounts, transaction fees, and net settlement amounts.
+
+We followed a Bronze, Silver, and Gold architecture. The Bronze layer stored raw source data, the Silver layer contained cleansed and standardized datasets, and the Gold layer contained business-ready merchant-level reporting datasets.
+
+In the Gold layer, we created merchant-level metrics such as total payment volume, successful and failed transactions, payment success rate, total refunds, net payment volume, and settlement summaries.
+
+We stored the processed datasets in Parquet format in GCS and loaded the curated datasets into BigQuery using incremental processing.
+
+The downstream BI and business teams used these BigQuery tables to build dashboards and analyze merchant performance across different countries, business categories, and reporting periods.
+
+We also handled duplicate records, late-arriving transactions, data-quality validations, and pipeline failures to maintain data consistency and reliability.
